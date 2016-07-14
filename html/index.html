@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta charset='utf-8'>
+        <title>Choose Your Own Adventure</title>
+
+        <meta name='description' content='A simple app to let the user choose their own adventure'>
+        <meta name='author' content=''>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no'>
+
+        <link rel='stylesheet' type='text/css' href='style.css'>
+    </head>
+    <body>
+
+        <section class='login view'>
+            <h1>Welcome!</h1>
+            <p>Please log in with your name...</p>
+            <form class='login' action='/login' method='post'>
+                <label for='login-name'>Your Name</label>
+                <input type='text' id='login-name' name='name' placeholder='Your Name'>
+                <input type='submit' value='Log in'>
+            </form>
+        </section>
+
+        <section class='story-list view'>
+            <h1>Choose a Story</h1>
+
+            <ul>
+                <!--
+                <li>
+                    <h2>Some Story Name</h2>
+                    <button data-id='12345'>Begin Story</button>
+                </li>
+                -->
+            </ul>
+        </section>
+
+        <section class='story-step view'>
+
+            <p class='story-text'></p>
+
+            <p class='story-end'>The End</p>
+
+            <aside class='option'>
+                <p class='option-a'></p>
+                <button data-option='5678'>Choose A</button>
+            </aside>
+            <aside class='option'>
+                <p class='option-b'></p>
+                <button data-option='9876'>Choose B</button>
+            </aside>
+        </section>
+
+        <script src='../js/jquery-3.0.0.js'></script>
+        <script src='../js/user.js'></script>
+        <script src='../js/adventure.js'></script>
+        <script src='../js/step.js'></script>
+
+
+    </body>
+</html>

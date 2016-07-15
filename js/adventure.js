@@ -4,6 +4,7 @@
 
     var $storyArea = $('.story-list-view');
     var adventures = [];
+    var chosenStory = {};
 
     ns.initUI = function initUI() {
         console.log('initiating UI and start game');
@@ -28,15 +29,23 @@
     function addStories(storyArr) {
         storyArr.forEach(function addStory(story){
             $storyArea
-                .append('<li class="story1">\
+                .find('ul')
+                .append('<li class="aStory">\
                             <h2>' + story.title + '</h2>\
-                            <button data-id=' + story.id + '>Begin ' + story.title + '</button>\
+                            <button class="storyButton" data-id=' + story.id + '>Begin ' + story.title + '</button>\
                          </li>')
         });
     }
 
-    $storyArea.on( 'click', function chooseStory() {
-            $(this).hide();
+    $storyArea.on( 'click', '.storyButton', function chooseStory() {
+            var id = $(this).attr('data-id');
+                console.log(id);
+
+            // $.ajax({
+            //     url:
+            // });
+
+            $storyArea.hide();
             ns.initStory();
         });
 

@@ -8,6 +8,10 @@
     //show first step story
     ns.initStory = function initStory() {
         $actionsArea.show();
+
+        // $.ajax({
+        //     ur
+        // });
     }
 
 

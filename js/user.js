@@ -7,6 +7,7 @@
     var $loginName = $('#login-name');
     var $storyArea = $('.story-list-view');
     var $actionsArea = $('.story-step-view')
+    var userID;
     var token;
 
     $loginForm.on( 'submit', function loginGame(e) {
@@ -40,9 +41,10 @@
             data: JSON.stringify({ 'name': username }),
             dataType: 'json'
         })
-        .done(function getToken(data) {
+        .done(function getTokenID(data) {
             token = data.token;
-            console.log('Token Saved', data.token);
+            userID = data.id;
+            console.log('Token and ID saved', data.token, data.id);
         })
     }
 

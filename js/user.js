@@ -6,7 +6,7 @@
     var $loginForm = $('.login');
     var $loginName = $('#login-name');
     var $storyArea = $('.story-list-view');
-    var $actionsArea = $('.story-step-view');
+    // var $actionsArea = $('.story-step-view');
     var userID;
     var token;
 
@@ -16,12 +16,7 @@
 
         var username = $loginName.val();
         ns.login(username)
-            .done(function initUI() {
-                console.log('initiating UI');
-                $loginArea.hide();
-                $storyArea.show();
-                $actionsArea.show();
-            })
+            .done( initUI )
             .fail(function loginFail(xhr) {
                 ns.error(xhr, $loginArea);
             });
@@ -45,7 +40,24 @@
             token = data.token;
             userID = data.id;
             console.log('Token and ID saved', data.token, data.id);
-        })
+        });
+    };
+
+    function initUI() {
+        console.log('initiating UI');
+        $loginArea.hide();
+        $storyArea.show();
+        // $actionsArea.show();
+
+        $storyArea
+            .append('<li>\
+                        <h2>Story 1</h2>\
+                        <button data-id=1>Begin Story 1</button>\
+                     </li>')
+            .append('<li>\
+                        <h2>Story 2</h2>\
+                        <button data-id=2>Begin Story 2</button>\
+                     </li>');
     }
 
     ns.error = function handleFail(xhr, elem) {

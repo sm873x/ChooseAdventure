@@ -26,13 +26,13 @@
         }
 
     function addStories(storyArr) {
-        storyArr.forEach(function addStory(){
+        storyArr.forEach(function addStory(story){
             $storyArea
                 .append('<li class="story1">\
-                            <h2>' + adventures[0].title + '</h2>\
-                            <button data-id=1>Begin Story 1</button>\
+                            <h2>' + story.title + '</h2>\
+                            <button data-id=' + story.id + '>Begin ' + story.title + '</button>\
                          </li>')
-        })
+        });
     }
 
     ns.initGame = function initGame() {

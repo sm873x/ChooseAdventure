@@ -5,6 +5,8 @@
     var $loginArea = $('.login-view');
     var $loginForm = $('.login');
     var $loginName = $('#login-name');
+    var $storyArea = $('.story-list-view');
+    var $actionsArea = $('.story-step-view')
     var token;
 
     $loginForm.on( 'submit', function loginGame(e) {
@@ -16,6 +18,8 @@
             .done(function initUI() {
                 console.log('initiating UI');
                 $loginArea.hide();
+                $storyArea.show();
+                $actionsArea.show();
             })
             .fail(function loginFail(xhr) {
                 ns.error(xhr, $loginArea)

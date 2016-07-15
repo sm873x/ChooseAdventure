@@ -1,3 +1,13 @@
+.story-list-view {
+  display: none; }
 
+.story-step-view {
+  display: none; }
+
+.view.login {
+  display: block; }
+
+.story-end {
+  display: none; }
 
 /*# sourceMappingURL=styles.css.map */

@@ -35,12 +35,11 @@
         });
     }
 
-    ns.initGame = function initGame() {
-        $storyArea.on( 'click', function chooseStory(e) {
-            e.target.hide();
+    $storyArea.on( 'click', function chooseStory() {
+            $(this).hide();
             ns.initStory();
         });
-    };
+
     // $.ajax({
     //     url: 'https://tiydc-coa-1.herokuapp.com/adventure',
     //     method: 'get',

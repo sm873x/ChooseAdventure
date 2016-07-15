@@ -12,7 +12,7 @@
 
         var username = $loginName.val();
         ns.login(username)
-            .done( ns.initUI, ns.initGame )
+            .done( ns.initUI )
             .fail(function loginFail(xhr) {
                 ns.error(xhr, $loginArea);
             });

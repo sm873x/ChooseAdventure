@@ -4,7 +4,7 @@
 
     var $storyArea = $('.story-list-view');
     var adventures = [];
-    var chosenStory = {};
+    var adventureID;
 
     ns.initUI = function initUI() {
         console.log('initiating UI and start game');
@@ -38,12 +38,20 @@
     }
 
     $storyArea.on( 'click', '.storyButton', function chooseStory() {
-            var id = $(this).attr('data-id');
-                console.log(id);
+            adventureID = $(this).attr('data-id');
+                console.log(typeof(adventureID));
 
-            // $.ajax({
-            //     url:
-            // });
+            $.ajax({
+                url: 'https://tiydc-coa-1.herokuapp.com/adventure/' + adventureID,
+                method: 'get',
+                headers: {
+                    'Authorization': ns.token
+                },
+                dataType: 'json'
+            })
+            .done(function(data){
+                console.log(data);
+            });
 
             $storyArea.hide();
             ns.initStory();

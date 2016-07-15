@@ -3,7 +3,6 @@
     window.adventure = ns = (ns || {});
 
     var $storyArea = $('.story-list-view');
-    var $actionsArea = $('.story-step-view');
 
     ns.initGame = function initGame() {
         $storyArea
@@ -16,15 +15,12 @@
                         <h2>Story 2</h2>\
                         <button data-id=2>Begin Story 2</button>\
                      </li>');
-    }
+    };
 
-    // ns.$storyArea.on( 'click', function chooseStory(e) {
-    //     // if ( e.target.attr('data-id') === 1) {
-    //         $actionsArea.show();
-    //         ns.$storyArea.hide();
-    //     // }
-    //
-    // })
+    $storyArea.on( 'click', function chooseStory(e) {
+            e.target.hide();
+            ns.initStory();
+    });
 
     function gameStory(elem) {
 

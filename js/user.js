@@ -5,8 +5,6 @@
     var $loginArea = $('.login-view');
     var $loginForm = $('.login');
     var $loginName = $('#login-name');
-    ns.userID;
-    ns.token;
 
     $loginForm.on( 'submit', function loginGame(e) {
         console.log('logged in');

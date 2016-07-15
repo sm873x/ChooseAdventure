@@ -13,6 +13,10 @@
 
         var username = $loginName.val();
         ns.login(username)
+            .done(function initUI() {
+                console.log('initiating UI');
+                $loginArea.hide();
+            })
             .fail(function loginFail(xhr) {
                 ns.error(xhr, $loginArea)
             });

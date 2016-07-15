@@ -16,7 +16,6 @@
             .fail(function loginFail(xhr) {
                 ns.error(xhr, $loginArea)
             });
-        console.log(ns.login(username));
     });
 
     ns.login = function login(username) {
@@ -27,7 +26,7 @@
         }
 
         return $.ajax({
-            url: 'https://tiydc-coa-1.herokuapp.com/user/login',
+            url: 'https://tiydc-coa-1.herokuapp.com/users/login',
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             data: JSON.stringify({ 'name': username }),
@@ -40,9 +39,9 @@
     }
 
     ns.error = function handleFail(xhr, elem) {
-        if (xhr.status >= 400) {
+        if ( 400 >= xhr.status < 500 ) {
             elem.text('Hmmm...what did you do?');
-        } else if (xhr.status >= 500){
+        } else if ( xhr.status >= 500){
             elem.text('Ruh roh, looks like we\'re having problems. Check back later please');
         }
     }

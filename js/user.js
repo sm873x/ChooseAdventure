@@ -6,7 +6,7 @@
     var $loginForm = $('.login');
     var $loginName = $('#login-name');
     var $storyArea = $('.story-list-view');
-    var $actionsArea = $('.story-step-view')
+    var $actionsArea = $('.story-step-view');
     var token;
 
     $loginForm.on( 'submit', function loginGame(e) {
@@ -22,7 +22,7 @@
                 $actionsArea.show();
             })
             .fail(function loginFail(xhr) {
-                ns.error(xhr, $loginArea)
+                ns.error(xhr, $loginArea);
             });
     });
 
@@ -43,8 +43,8 @@
         .done(function getToken(data) {
             token = data.token;
             console.log('Token Saved', data.token);
-        })
-    }
+        });
+    };
 
     ns.error = function handleFail(xhr, elem) {
         if ( 400 >= xhr.status < 500 ) {
@@ -52,6 +52,6 @@
         } else if ( xhr.status >= 500){
             elem.text('Ruh roh, looks like we\'re having problems. Check back later please');
         }
-    }
+    };
 
 })(window.adventure);

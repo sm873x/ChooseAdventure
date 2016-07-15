@@ -2,7 +2,7 @@
     'use strict';
     window.adventure = ns = (ns || {});
 
-    var $loginArea = $('.login-view');
+    ns.$loginArea = $('.login-view');
     var $loginForm = $('.login');
     var $loginName = $('#login-name');
 
@@ -12,7 +12,7 @@
 
         var username = $loginName.val();
         ns.login(username)
-            .done( initUI, ns.initGame )
+            .done( ns.initUI, ns.initGame )
             .fail(function loginFail(xhr) {
                 ns.error(xhr, $loginArea);
             });
@@ -38,24 +38,6 @@
             console.log('Token and ID saved', ns.token, ns.userID);
         });
     };
-
-    function initUI() {
-        console.log('initiating UI and start game');
-        $loginArea.hide();
-
-        $.ajax({
-                url: 'https://tiydc-coa-1.herokuapp.com/adventure',
-                method: 'get',
-                headers: {'Authorization': ns.token},
-                dataType: 'json'
-            })
-            .done(function adventuresList(data) {
-                ns.adventures = data;
-                console.log(ns.adventures);
-            } )
-            .fail(ns.error);
-
-    }
 
     ns.error = function handleFail(xhr) {
         if ( 400 >= xhr.status < 500 ) {

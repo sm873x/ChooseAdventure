@@ -42,13 +42,26 @@
     function initUI() {
         console.log('initiating UI and start game');
         $loginArea.hide();
+
+        $.ajax({
+                url: 'https://tiydc-coa-1.herokuapp.com/adventure',
+                method: 'get',
+                headers: {'Authorization': ns.token},
+                dataType: 'json'
+            })
+            .done(function adventuresList(data) {
+                ns.adventures = data;
+                console.log(ns.adventures);
+            } )
+            .fail(ns.error);
+
     }
 
-    ns.error = function handleFail(xhr, elem) {
+    ns.error = function handleFail(xhr) {
         if ( 400 >= xhr.status < 500 ) {
-            elem.text('Hmmm...what did you do?');
+            $loginArea.text('Hmmm...what did you do?');
         } else if ( xhr.status >= 500){
-            elem.text('Ruh roh, looks like we\'re having problems. Check back later please');
+            $loginArea.text('Ruh roh, looks like we\'re having problems. Check back later please');
         }
     };
 

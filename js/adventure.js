@@ -39,7 +39,7 @@
 
     $storyArea.on( 'click', '.storyButton', function chooseStory() {
             adventureID = $(this).attr('data-id');
-                console.log(typeof(adventureID));
+                console.log('adventureID', adventureID);
 
             $.ajax({
                 url: 'https://tiydc-coa-1.herokuapp.com/adventure/' + adventureID,
@@ -50,8 +50,11 @@
                 dataType: 'json'
             })
             .done(function(data){
-                console.log(data);
-            });
+                $('.story-text').text('add step text here');
+                ns.firstStepID = data.first_step_id;
+                console.log('adv xhr', data, ns.firstStepID);
+            })
+            .fail(ns.error);
 
             $storyArea.hide();
             ns.initStory();

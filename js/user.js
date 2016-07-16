@@ -14,7 +14,7 @@
         ns.login(username)
             .done( ns.initUI )
             .fail(function loginFail(xhr) {
-                ns.error(xhr, $loginArea);
+                ns.error(xhr, ns.$loginArea);
             });
     });
 
@@ -41,9 +41,9 @@
 
     ns.error = function handleFail(xhr) {
         if ( 400 >= xhr.status < 500 ) {
-            $loginArea.text('Hmmm...what did you do?');
+            ns.$loginArea.text('Hmmm...what did you do?');
         } else if ( xhr.status >= 500){
-            $loginArea.text('Ruh roh, looks like we\'re having problems. Check back later please');
+            ns.$loginArea.text('Ruh roh, looks like we\'re having problems. Check back later please');
         }
     };
 

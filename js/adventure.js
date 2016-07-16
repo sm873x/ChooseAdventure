@@ -24,7 +24,7 @@
                 addStories(adventures);
             } )
             .fail(ns.error);
-        }
+        };
 
     function addStories(storyArr) {
         storyArr.forEach(function addStory(story){
@@ -33,7 +33,7 @@
                 .append('<li class="aStory">\
                             <h2>' + story.title + '</h2>\
                             <button class="storyButton" data-id=' + story.id + '>Begin ' + story.title + '</button>\
-                         </li>')
+                         </li>');
         });
     }
 
@@ -50,14 +50,14 @@
                 dataType: 'json'
             })
             .done(function(data){
-                $('.story-text').text('add step text here');
                 ns.firstStepID = data.first_step_id;
-                console.log('adv xhr', data, ns.firstStepID);
+                ns.initStory();
+                console.log('adv xhr', data);
+                console.log('first step', ns.firstStepID);
             })
             .fail(ns.error);
 
             $storyArea.hide();
-            ns.initStory();
         });
 
     // $.ajax({

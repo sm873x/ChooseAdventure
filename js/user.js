@@ -41,9 +41,9 @@
 
     ns.error = function handleFail(xhr) {
         if ( 400 >= xhr.status < 500 ) {
-            ns.$loginArea.text('Hmmm...what did you do?');
+            $('body').text('Hmmm...what did you do?');
         } else if ( xhr.status >= 500){
-            ns.$loginArea.text('Ruh roh, looks like we\'re having problems. Check back later please');
+            $('body').text('Ruh roh, looks like we\'re having problems. Check back later please');
         }
     };
 

@@ -13,9 +13,7 @@
         var username = $loginName.val();
         ns.login(username)
             .done( ns.initUI )
-            .fail(function loginFail(xhr) {
-                ns.error(xhr, ns.$loginArea);
-            });
+            .fail( ns.error );
     });
 
     ns.login = function login(username) {
@@ -24,7 +22,7 @@
             def.reject('You don\'t have a name? Really?');
             return def.promise();
         }
-
+        
         return $.ajax({
             url: 'https://tiydc-coa-1.herokuapp.com/users/login',
             method: 'post',
@@ -41,9 +39,9 @@
 
     ns.error = function handleFail(xhr) {
         if ( 400 >= xhr.status < 500 ) {
-            $('body').text('Hmmm...what did you do?');
+            $(this).text('Hmmm...what did you do?');
         } else if ( xhr.status >= 500){
-            $('body').text('Ruh roh, looks like we\'re having problems. Check back later please');
+            $(this).text('Ruh roh, looks like we\'re having problems. Check back later please');
         }
     };
 

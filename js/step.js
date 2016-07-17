@@ -45,6 +45,8 @@
             dataType: 'json'
         })
         .done(function nextStepOptions(data) {
+            ns.lastStepID = data.id;
+            console.log('last step ID', ns.lastStepID);
             ns.nextStep(data);
         })
         .fail( ns.error );
@@ -58,6 +60,8 @@
             dataType: 'json'
         })
         .done(function nextStepOptions(data) {
+            ns.lastStepID = data.id;
+            console.log('last step ID', ns.lastStepID);
             ns.nextStep(data);
         })
         .fail( ns.error );
@@ -84,8 +88,38 @@
         } else {
             $option.hide();
             $theEnd.show();
+            $('.tryAgain').show();
             console.log('end game');
         }
     }
 
+    $('.tryAgain').on( 'click', function goBack() {
+        $option.show();
+        $theEnd.hide();
+        $('.tryAgain').hide();
+
+        goBackOne();
+
+        console.log('tried again');
+    });
+
+    function goBackOne() {
+        $.ajax({
+            url: 'https://tiydc-coa-1.herokuapp.com/step/' + ns.lastStepID,
+            method: 'get',
+            headers: { 'Authorization': ns.token },
+            dataType: 'json'
+        })
+        .done(function reloadStep(data) {
+            ns.lastStepID = data.id;
+            console.log('last step ID', ns.lastStepID);
+
+            $storyText.text(data.body);
+            ns.theEnd = data.termination;
+            ns.optAstep = data.option_a_step_id;
+            ns.optBstep = data.option_b_step_id;
+
+        })
+        .fail( ns.error );
+    }
 })(window.adventure);

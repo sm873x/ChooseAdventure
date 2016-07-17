@@ -71,6 +71,10 @@
         $storyText.text(data.body);
         console.log(data);
 
+        endStory(data);
+    }
+
+    function endStory(data) {
         if (ns.theEnd === false) {
             $optAtxt.text(data.option_a_text);
             $buttonA.attr('data-option', 'a');

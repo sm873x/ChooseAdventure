@@ -6,6 +6,10 @@
     var adventures = [];
     var adventureID;
 
+    /**
+     * Initialize UI to start game with list of available adventure options
+     * @return {void}
+     */
     ns.initUI = function initUI() {
         console.log('initiating UI and start game');
         ns.$loginArea.hide();
@@ -47,13 +51,18 @@
         $storyArea.hide();
     });
 
+    /**
+     * List every story and include title and button to play that adventure.
+     * @param {array} storyArr Array that keeps list of all available stories
+     */
     function addStories(storyArr) {
         storyArr.forEach(function addStory(story){
             $storyArea
                 .find('ul')
                 .append('<li class="aStory">\
                             <h2>' + story.title + '</h2>\
-                            <button class="storyButton" data-id=' + story.id + '>Begin ' + story.title + '</button>\
+                            <button class="storyButton" data-id=' + story.id + '>\
+                            Begin ' + story.title + '</button>\
                          </li>');
         });
     }

@@ -18,8 +18,8 @@
 
     /**
      * Login to start game with username and save token and user-id data.
-     * @param  {string} username Name of user playing game
-     * @return {promise} jQuery XHR object (with promise method on it)
+     * @param  {String} username Name of user playing game
+     * @return {Promise} jQuery XHR object (with promise method on it)
      */
     ns.login = function login(username) {
         if (!username) {
@@ -46,11 +46,11 @@
 
     /**
      * Displays error messages depending on status code of callback functions
-     * @param  {json} jQuery XHR object Data of callback function
+     * @param  {XMLHttpRequet|String} jQuery XHR object Data of callback function
      * @return {void}
      */
     ns.error = function handleFail(xhr) {
-        if ( 400 >= xhr.status < 500 ) {
+        if ( 400 >= xhr.status < 500 ) {  // split into two conditions with logical operator
             $(this).text('Hmmm...what did you do?');
         } else if ( xhr.status >= 500){
             $(this).text('Ruh roh, looks like we\'re having problems. Check back later please');

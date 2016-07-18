@@ -18,23 +18,25 @@
 
     ns.login = function login(username) {
         if (!username) {
-            var def = $.Deferred();
-            def.reject('You don\'t have a name? Really?');
-            return def.promise();
-        }
-        
+            // var def = $.Deferred();
+            // def.reject('You don\'t have a name? Really?');
+            // return def.promise();
+            console.log('no name');
+            return ns.$loginArea.text('You don\'t have a name?');
+        } else {
         return $.ajax({
             url: 'https://tiydc-coa-1.herokuapp.com/users/login',
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             data: JSON.stringify({ 'name': username }),
             dataType: 'json'
-        })
-        .done(function getTokenID(data) {
-            ns.token = data.token;
-            ns.userID = data.id;
-            console.log('Token and ID saved', ns.token, ns.userID);
-        });
+            })
+            .done(function getTokenID(data) {
+                ns.token = data.token;
+                ns.userID = data.id;
+                console.log('Token and ID saved', ns.token, ns.userID);
+            });
+        }
     };
 
     ns.error = function handleFail(xhr) {

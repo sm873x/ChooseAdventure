@@ -54,7 +54,7 @@
                 .append('<li class="aStory">\
                             <h2>' + story.title + '</h2>\
                             <button class="storyButton" data-id=' + story.id + '>Begin ' + story.title + '</button>\
-                         </li>')
+                         </li>');
         });
     }
 

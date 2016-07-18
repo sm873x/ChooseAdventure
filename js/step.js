@@ -10,6 +10,7 @@
     var $optAtxt = $('.option-a');
     var $optBtxt = $('.option-b');
     var $theEnd = $('.story-end');
+    var $tryAgain = $('.tryAgain');
 
     ns.initStory = function initStory() {
         $actionsArea.show();
@@ -24,10 +25,9 @@
             ns.nextStep(data);
         })
         .fail( ns.error );
-    }
+    };
 
-    $option.on('click', function chooseButton(e) {
-
+    $option.on('click', function chooseButton() {
         if ( $buttonA.attr('data-option') === 'a') {
             chooseOptA();
             console.log('a chosen');
@@ -35,6 +35,35 @@
             chooseOptB();
             console.log('b chosen');
         }
+    });
+
+    ns.nextStep = function getStepData(data) {
+        ns.theEnd = data.termination;
+        ns.optAstep = data.option_a_step_id;
+        ns.optBstep = data.option_b_step_id;
+
+        $storyText.text(data.body);
+        console.log(data);
+
+        storyLoc(data);
+    };
+
+    $('.tryAgain').on( 'click', function goBack() {
+        $option.show();
+        $theEnd.hide();
+        $tryAgain.hide();
+
+        goBackOne()
+            .done(function reloadStep(data) {
+                $storyText.text(data.body);
+
+                ns.theEnd = data.termination;
+                ns.optAstep = data.option_a_step_id;
+                ns.optBstep = data.option_b_step_id;
+            })
+            .fail( ns.error );
+
+        console.log('tried again');
     });
 
     function chooseOptA() {
@@ -45,8 +74,6 @@
             dataType: 'json'
         })
         .done(function nextStepOptions(data) {
-            ns.lastStepID = data.id;
-            console.log('last step ID', ns.lastStepID);
             ns.nextStep(data);
         })
         .fail( ns.error );
@@ -60,25 +87,12 @@
             dataType: 'json'
         })
         .done(function nextStepOptions(data) {
-            ns.lastStepID = data.id;
-            console.log('last step ID', ns.lastStepID);
             ns.nextStep(data);
         })
         .fail( ns.error );
     }
 
-    ns.nextStep = function getStepData(data) {
-        ns.theEnd = data.termination;
-        ns.optAstep = data.option_a_step_id;
-        ns.optBstep = data.option_b_step_id;
-
-        $storyText.text(data.body);
-        console.log(data);
-
-        endStory(data);
-    }
-
-    function endStory(data) {
+    function storyLoc(data) {
         if (ns.theEnd === false) {
             $optAtxt.text(data.option_a_text);
             $buttonA.attr('data-option', 'a');
@@ -88,38 +102,19 @@
         } else {
             $option.hide();
             $theEnd.show();
-            $('.tryAgain').show();
+            $tryAgain.show();
             console.log('end game');
         }
+
+        return ns.lastStepID = (data.id)-1;
     }
 
-    $('.tryAgain').on( 'click', function goBack() {
-        $option.show();
-        $theEnd.hide();
-        $('.tryAgain').hide();
-
-        goBackOne();
-
-        console.log('tried again');
-    });
-
     function goBackOne() {
-        $.ajax({
+        return $.ajax({
             url: 'https://tiydc-coa-1.herokuapp.com/step/' + ns.lastStepID,
             method: 'get',
             headers: { 'Authorization': ns.token },
             dataType: 'json'
-        })
-        .done(function reloadStep(data) {
-            ns.lastStepID = data.id;
-            console.log('last step ID', ns.lastStepID);
-
-            $storyText.text(data.body);
-            ns.theEnd = data.termination;
-            ns.optAstep = data.option_a_step_id;
-            ns.optBstep = data.option_b_step_id;
-
-        })
-        .fail( ns.error );
+        });
     }
 })(window.adventure);

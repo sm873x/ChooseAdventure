@@ -28,8 +28,6 @@
             var def = $.Deferred();
             def.reject('You don\'t have a name? Really?');
             return def.promise();
-
-            console.log('no name');
         }
 
         return $.ajax({
@@ -49,7 +47,7 @@
     /**
      * Displays error messages depending on status code of callback functions
      * @param  {json} jQuery XHR object Data of callback function
-     * @return {void}   
+     * @return {void}
      */
     ns.error = function handleFail(xhr) {
         if ( 400 >= xhr.status < 500 ) {

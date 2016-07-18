@@ -12,6 +12,10 @@
     var $theEnd = $('.story-end');
     var $tryAgain = $('.tryAgain');
 
+    /**
+     * Initiate chosen adventure and load next step
+     * @return {void}
+     */
     ns.initStory = function initStory() {
         $actionsArea.show();
 
@@ -37,6 +41,11 @@
         }
     });
 
+    /**
+     * Assign variables to next step data and change story text
+     * @param  {xhr} data jQuery XHR object
+     * @return {void}
+     */
     ns.nextStep = function getStepData(data) {
         ns.theEnd = data.termination;
         ns.optAstep = data.option_a_step_id;
@@ -66,6 +75,10 @@
         console.log('tried again');
     });
 
+    /**
+     * Choose option A and load next step information
+     * @return {void}
+     */
     function chooseOptA() {
         $.ajax({
             url: 'https://tiydc-coa-1.herokuapp.com/step/' + ns.optAstep,
@@ -79,6 +92,10 @@
         .fail( ns.error );
     }
 
+    /**
+     * Choose option B and load next step information
+     * @return {void}
+     */
     function chooseOptB() {
         $.ajax({
             url: 'https://tiydc-coa-1.herokuapp.com/step/' + ns.optBstep,
@@ -92,6 +109,13 @@
         .fail( ns.error );
     }
 
+    /**
+     * Determine if the story continues or ends.
+     * If adventure continues then it will load new story text and new options.
+     * If adventure ends, it will show The End with option to redo the last step.
+     * @param  {jquery} data XHR object
+     * @return {number} ns.lastStepID The ID number of the last step taken before end was reached   
+     */
     function storyLoc(data) {
         if (ns.theEnd === false) {
             $optAtxt.text(data.option_a_text);
@@ -109,6 +133,10 @@
         return ns.lastStepID = (data.id)-1;
     }
 
+    /**
+     * Once story ends, callback function for data from last step.
+     * @return {json} jQuery XHR object
+     */
     function goBackOne() {
         return $.ajax({
             url: 'https://tiydc-coa-1.herokuapp.com/step/' + ns.lastStepID,

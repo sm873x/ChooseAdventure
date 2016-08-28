@@ -33,10 +33,10 @@
 
     $option.on('click', function chooseButton() {
         if ( $buttonA.attr('data-option') === 'a') {
-            chooseOptA();
+            chooseOpt(ns.optAstep);
             console.log('a chosen');
         } else {
-            chooseOptB();
+            chooseOpt(ns.optBstep);
             console.log('b chosen');
         }
     });
@@ -76,29 +76,13 @@
     });
 
     /**
-     * Choose option A and load next step information
+     * Choose option A or B with step id
+     * @param  {String} option Step id
      * @return {void}
      */
-    function chooseOptA() {
+    function chooseOpt(option) {
         $.ajax({
-            url: 'https://tiydc-coa-1.herokuapp.com/step/' + ns.optAstep,
-            method: 'get',
-            headers: { 'Authorization': ns.token },
-            dataType: 'json'
-        })
-        .done(function nextStepOptions(data) {
-            ns.nextStep(data);
-        })
-        .fail( ns.error );
-    }
-
-    /**
-     * Choose option B and load next step information
-     * @return {void}
-     */
-    function chooseOptB() {
-        $.ajax({
-            url: 'https://tiydc-coa-1.herokuapp.com/step/' + ns.optBstep,
+            url: 'https://tiydc-coa-1.herokuapp.com/step/' + option,
             method: 'get',
             headers: { 'Authorization': ns.token },
             dataType: 'json'
@@ -114,7 +98,7 @@
      * If adventure continues then it will load new story text and new options.
      * If adventure ends, it will show The End with option to redo the last step.
      * @param  {jquery} data XHR object
-     * @return {number} ns.lastStepID The ID number of the last step taken before end was reached   
+     * @return {number} ns.lastStepID The ID number of the last step taken before end was reached
      */
     function storyLoc(data) {
         if (ns.theEnd === false) {

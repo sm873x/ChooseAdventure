@@ -32,7 +32,7 @@
     };
 
     $option.on('click', function chooseButton() {
-        if ( $buttonA.attr('data-option') === 'a') {
+        if ( $(this).attr('data-option') === 'a') {
             chooseOpt(ns.optAstep);
             console.log('a chosen');
         } else {
